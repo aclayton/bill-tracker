@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "last_updated": "2026-03-19T20:00:00Z",
+  "last_updated": "2026-04-12T10:45:00Z",
   "bills": [
     {
       "id": "cogeco-main",
@@ -128,6 +128,52 @@
       "notes": "Account: 1092618-11. eBill ready Mar 17 2026 ($108.41 due Apr 7, Balance -$15.50). Portal: https://myaccount.npei.ca. Prev March bill $115.77 paid Mar 15.",
       "auto_track": true,
       "tags": ["utilities", "electricity", "home"]
+    },
+    {
+      "id": "schoolcash-dsbno",
+      "name": "SchoolCash Online",
+      "category": "Education",
+      "provider": "District School Board of Niagara",
+      "amount": 50.00,
+      "currency": "CAD",
+      "due_day": 30,
+      "billing_period": "event",
+      "next_due": "2026-04-30",
+      "status": "pending",
+      "payment_method": "online",
+      "notes": "New attachment notification received 2026-04-11. Estimated amount based on typical school fees. Email thread: 19d7d3b376964d14.",
+      "auto_track": false,
+      "tags": ["school", "education", "pending_review"]
+    },
+    {
+      "id": "apple-receipts-apr2026",
+      "name": "Apple Receipts",
+      "category": "Subscriptions",
+      "provider": "Apple",
+      "amount": 29.90,
+      "currency": "CAD",
+      "due_day": "varies",
+      "billing_period": "monthly",
+      "status": "pending",
+      "payment_method": "credit_card",
+      "notes": "Multiple Apple receipts in Apr 2026: Apr 9 (15:45), Apr 10 (06:43), Apr 10 (09:21), Apr 12 (02:30). Total estimated $29.90 for services. Email threads: 19d773485dae662c, 19d73fec4be3a38e, 19d7d3b376964d14, 19d80992355684c8.",
+      "auto_track": false,
+      "tags": ["subscription", "tech", "pending_review"]
+    },
+    {
+      "id": "pothole-claim-26-95",
+      "name": "Pothole Claim - Niagara Motors",
+      "category": "Insurance",
+      "provider": "Niagara Motors",
+      "amount": 0.00,
+      "currency": "CAD",
+      "due_day": "varies",
+      "billing_period": "incident",
+      "status": "pending",
+      "payment_method": "insurance",
+      "notes": "Car damage claim from pothole on Welland Canals Parkway (Claim: 26-95). Submission date: Mar 30, 2026. receipts from Niagara Motors AO1-2-069249. Estimated repair cost pending insurance assessment. Email threads: 19d77a77eddd21e1, 19d77a1195c05db5, 19d7393353fc5859.",
+      "auto_track": false,
+      "tags": ["insurance", "vehicle", "incident", "pending_review"]
     }
   ]
 }
