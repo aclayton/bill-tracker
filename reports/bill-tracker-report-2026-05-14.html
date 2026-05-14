@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill Tracker Report - 2026-05-14</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #333; }
+        h2 { color: #555; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .overdue { background-color: #ffebee !important; }
+        .upcoming { background-color: #fff8e1 !important; }
+        .summary { background-color: #e8f5e9; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .total { font-weight: bold; color: #d32f2f; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <h1>Bill Tracker Report - 2026-05-14</h1>
+    <p><strong>Generated:</strong> 2026-05-14 12:30:47</p>
+    <p><strong>Data Updated:</strong> 2026-05-14T11:30:00Z</p>
+    
+    <div class="summary">
+        <h2>Summary</h2>
+        <table>
+            <tr><th>Metric</th><th>Value</th></tr>
+            <tr><td>Total Bills</td><td>6</td></tr>
+            <tr><td>Unpaid</td><td>6</td></tr>
+            <tr><td>Paid</td><td>0</td></tr>
+            <tr><td>Total Unpaid</td><td class="total">$393.24 CAD</td></tr>
+            <tr><td>Monthly Average</td><td>$82.14 CAD</td></tr>
+        </table>
+    </div>
+    
+    <h2>Unpaid Bills</h2>
+    <table>
+        <tr><th>Vendor</th><th>Amount</th><th>Due Date</th><th>Status</th></tr>
+        <tr class="overdue">
+            <td>Enbridge Gas</td>
+            <td>$92.45 CAD</td>
+            <td>2026-04-14</td>
+            <td>OVERDUE</td>
+        </tr>
+        <tr class="overdue">
+            <td>Enercare</td>
+            <td>$24.99 CAD</td>
+            <td>2026-04-11</td>
+            <td>OVERDUE</td>
+        </tr>
+        <tr class="overdue">
+            <td>NPEI Electricity</td>
+            <td>$108.30 CAD</td>
+            <td>2026-04-07</td>
+            <td>OVERDUE</td>
+        </tr>
+        <tr class="overdue">
+            <td>Cogeco</td>
+            <td>$105.00 CAD</td>
+            <td>2026-04-23</td>
+            <td>OVERDUE</td>
+        </tr>
+        <tr class="overdue">
+            <td>SchoolCash</td>
+            <td>$50.00 CAD</td>
+            <td>2026-04-30</td>
+            <td>OVERDUE</td>
+        </tr>
+        <tr class="overdue">
+            <td>TD Bank</td>
+            <td>$12.50 CAD</td>
+            <td>2026-04-15</td>
+            <td>OVERDUE</td>
+        </tr>
+    </table>
+    
+    <h2>Payment History</h2>
+    <table>
+        <tr><th>Date</th><th>Bill ID</th><th>Amount</th></tr>
+    </table>
+    
+    <h2>Projections</h2>
+    <p><strong>Projected for next cycle:</strong> $393.24 CAD</p>
+</body>
+</html>
