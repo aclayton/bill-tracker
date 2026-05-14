@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-14T11:30:00Z",
+  "lastUpdated": "2026-05-14T17:30:47.457071Z",
   "bills": [
     {
       "id": "enbridge-2026-04",
@@ -22,7 +22,7 @@
     {
       "id": "npei-electricity-2026-04",
       "vendor": "NPEI Electricity",
-      "amount": 108.30,
+      "amount": 108.3,
       "dueDate": "2026-04-07",
       "paid": false,
       "receipt": null,
@@ -31,7 +31,7 @@
     {
       "id": "cogeco-2026-04",
       "vendor": "Cogeco",
-      "amount": 105.00,
+      "amount": 105.0,
       "dueDate": "2026-04-23",
       "paid": false,
       "receipt": null,
@@ -40,7 +40,7 @@
     {
       "id": "schoolcash-2026-04",
       "vendor": "SchoolCash",
-      "amount": 50.00,
+      "amount": 50.0,
       "dueDate": "2026-04-30",
       "paid": false,
       "receipt": null,
@@ -49,7 +49,7 @@
     {
       "id": "td-2026-04",
       "vendor": "TD Bank",
-      "amount": 12.50,
+      "amount": 12.5,
       "dueDate": "2026-04-15",
       "paid": false,
       "receipt": null,
@@ -58,7 +58,7 @@
   ],
   "summary": {
     "totalUnpaid": 393.24,
-    "overdueCount": 5,
-    "monthlyAverage": 82.14
+    "overdueCount": 6,
+    "monthlyAverage": 65.54
   }
 }
