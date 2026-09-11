@@ -8,14 +8,54 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 from typing import Callable
+
+
+def _read_env_file_key(name: str) -> str | None:
+    """Read a key from known env files as a fallback.
+
+    Checks, in order:
+      - ~/.hermes/.env   (Hermes Agent, so the tool works when Hermes runs it)
+      - ./.env           (project-local, for standalone use)
+    """
+    candidates = [
+        Path.home() / ".hermes" / ".env",
+        Path(".env"),
+    ]
+    for path in candidates:
+        try:
+            if not path.exists():
+                continue
+            for line in path.read_text().splitlines():
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, _, value = line.partition("=")
+                if key.strip() == name:
+                    value = value.strip().strip('"').strip("'")
+                    if value:
+                        return value
+        except OSError:
+            continue
+    return None
+
+
+def _get_api_key() -> str | None:
+    """Resolve the API key from env, then fall back to env files."""
+    return (
+        os.environ.get("OPENROUTER_API_KEY")
+        or os.environ.get("OPENAI_API_KEY")
+        or _read_env_file_key("OPENROUTER_API_KEY")
+        or _read_env_file_key("OPENAI_API_KEY")
+    )
 
 
 def openrouter_call(prompt: str, model: str) -> str:
     """Call an OpenRouter-compatible LLM and return the raw response text.
 
     Uses the OpenAI-compatible chat completions endpoint.
-    Reads OPENROUTER_API_KEY from environment.
+    Reads OPENROUTER_API_KEY from environment, falling back to ~/.hermes/.env.
 
     Args:
         prompt: The system/user prompt to send.
@@ -27,12 +67,11 @@ def openrouter_call(prompt: str, model: str) -> str:
     Raises:
         RuntimeError: If no API key is configured or the API call fails.
     """
-    # Read API key: prefer OPENROUTER_API_KEY, fall back to OPENAI_API_KEY
-    api_key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get("OPENAI_API_KEY")
+    api_key = _get_api_key()
     if not api_key:
         raise RuntimeError(
-            "No API key found. Set OPENROUTER_API_KEY or OPENAI_API_KEY in the environment. "
-            "Hermes sets this automatically when you configure an OpenRouter key."
+            "No API key found. Set OPENROUTER_API_KEY or OPENAI_API_KEY in the environment, "
+            "or add it to ~/.hermes/.env (Hermes) or ./.env (standalone)."
         )
 
     base_url = os.environ.get(
