@@ -52,6 +52,7 @@ def cmd_scan(args: argparse.Namespace) -> int:
 
     save_bills(data_dir, store_bills)
     save_receipts(data_dir, store_receipts)
+    save_vendors("vendors.yaml", vendors)
 
     print(f"Type: {result['type']}")
     print(f"Action: {summary['action']}")
