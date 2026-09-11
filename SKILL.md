@@ -7,11 +7,12 @@ description: Scan Gmail for bills and receipts, track payments, generate reports
 
 ## Daily Scan
 
-1. Use the Gmail tool to search for bills:
-   `newer_than:1d (bill OR invoice OR due OR statement)`
-2. Use the Gmail tool to search for receipts:
-   `newer_than:1d (receipt OR "payment confirmation" OR "thank you for your payment" OR "paid")`
-3. For each result from both searches, get the full message content
+1. Use the himalaya skill to search for bills:
+   `himalaya gmail messages list "bill OR invoice OR due OR statement" --page-size 30`
+2. Use the himalaya skill to search for receipts:
+   `himalaya gmail messages list "receipt OR payment confirmation OR thank you for your payment" --page-size 30`
+3. For each result, read the message content:
+   `himalaya gmail messages get <id>`
 4. Pipe subject + body to: `bill-tracker scan --subject "..." --email-id "..."` via stdin
 5. Report new bills found AND any receipts that were auto-matched to bills
 
@@ -26,7 +27,7 @@ description: Scan Gmail for bills and receipts, track payments, generate reports
 ## Deep Scan (historical data)
 
 To rebuild the database from Gmail history:
-1. Use the Gmail tool to search: `newer_than:90d (bill OR invoice OR receipt OR payment)`
+1. Use the himalaya skill to search: `himalaya gmail messages list "bill OR invoice OR receipt OR payment" --page-size 50`
 2. Run `bill-tracker backup` first to preserve existing data
 3. Pipe each email through `bill-tracker scan` as in the daily scan
 4. Run `bill-tracker report` to verify results
