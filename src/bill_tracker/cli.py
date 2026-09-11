@@ -21,6 +21,7 @@ from bill_tracker.store import (
 from bill_tracker.scanner import scan_email, process_scan_result
 from bill_tracker.reporter import generate_report, apply_filter, apply_sort, format_bill_row
 from bill_tracker.vendors import save_vendors
+from bill_tracker.llm import openrouter_call
 
 
 def cmd_scan(args: argparse.Namespace) -> int:
@@ -45,7 +46,8 @@ def cmd_scan(args: argparse.Namespace) -> int:
 
     print(f"Scanning email: {subject[:60]}...")
 
-    result = scan_email(subject, body, email_id, config, vendors)
+    llm_call = openrouter_call
+    result = scan_email(subject, body, email_id, config, vendors, llm_call=llm_call)
     summary = process_scan_result(result, store_bills, store_receipts, vendors, config)
 
     save_bills(data_dir, store_bills)
