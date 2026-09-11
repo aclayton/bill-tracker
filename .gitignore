@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Runtime data
+data/bills.json
+data/bills.json.bak
+data/receipts.json
+data/receipts.json.bak
+reports/*.md
+reports/*.html
+
+# User config (template is committed)
+config.yaml
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# pytest
+.pytest_cache/

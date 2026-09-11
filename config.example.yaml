@@ -1,0 +1,19 @@
+# Bill Tracker v3 — Configuration Template
+# Copy to config.yaml and customize.
+
+gmail:
+  account: ""
+  search_window: "1d"
+  bill_query: "bill OR invoice OR due OR statement"
+  receipt_query: 'receipt OR "payment confirmation" OR "thank you for your payment"'
+
+storage:
+  data_dir: "./data"
+
+matching:
+  amount_tolerance: 0.50
+  confidence_threshold: 0.7
+
+parser:
+  model: "google/gemini-3-flash-preview"
+  max_tokens: 200

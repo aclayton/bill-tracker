@@ -1,0 +1,40 @@
+# Bill Tracker — Report Configuration
+# Define report sections with filters, sorting, and columns.
+
+sections:
+  - id: unpaid_bills
+    title: "Unpaid Bills"
+    filter: "unpaid:true"
+    sort: "dueDate:asc"
+    columns: [vendor, amount, dueDate, daysLate, category]
+    delivery: [telegram, file]
+
+  - id: recently_paid
+    title: "Recently Paid (This Month)"
+    filter: "paid:true paidDate:this-month"
+    sort: "paidDate:desc"
+    columns: [vendor, amount, paidDate, paymentMethod]
+    delivery: [telegram, file]
+
+  - id: unmatched_receipts
+    title: "Unmatched Receipts (Needs Review)"
+    filter: "matched:false"
+    sort: "paymentDate:desc"
+    columns: [vendor, amount, paymentDate, emailSubject]
+    delivery: [telegram, file]
+
+  - id: discovered_vendors
+    title: "New Vendors Detected"
+    filter: "category:uncategorized"
+    sort: "receivedDate:desc"
+    columns: [vendor, amount, receivedDate]
+    delivery: [telegram]
+
+output:
+  formats: [md]
+  file_dir: "./reports"
+  file_pattern: "bill-tracker-report-{date}.{ext}"
+
+delivery:
+  telegram: true
+  telegram_target: ""
