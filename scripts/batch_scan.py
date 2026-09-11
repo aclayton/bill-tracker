@@ -40,29 +40,23 @@ for i, uid in enumerate(uids):
     subject = msg.get("Subject", "")
     # Get body as string
     body_str = ""
+    # Collect all text parts (some vendors put amounts only in HTML)
+    parts = []
+    import re as _re
     for part in msg.walk():
-        if part.get_content_type() == "text/plain":
-            try:
-                content = part.get_content()
-                body_str = content.decode("utf-8", errors="replace") if isinstance(content, bytes) else str(content or "")
-            except Exception:
-                pass
-            break
-
-    # Fallback: HTML-only emails
-    if not body_str:
-        for part in msg.walk():
-            if part.get_content_type() == "text/html":
-                try:
-                    content = part.get_content()
-                    html = content.decode("utf-8", errors="replace") if isinstance(content, bytes) else str(content or "")
-                    # Strip HTML tags to plain text
-                    import re
-                    body_str = re.sub(r"<[^>]+>", " ", html)
-                    body_str = re.sub(r"\s+", " ", body_str).strip()
-                except Exception:
-                    pass
-                break
+        ct = part.get_content_type()
+        try:
+            content = part.get_content()
+            text = content.decode("utf-8", errors="replace") if isinstance(content, bytes) else str(content or "")
+        except Exception:
+            continue
+        if ct == "text/plain":
+            parts.append(text)
+        elif ct == "text/html":
+            stripped = _re.sub(r"<[^>]+>", " ", text)
+            stripped = _re.sub(r"\s+", " ", stripped).strip()
+            parts.append(stripped)
+    body_str = "\n\n".join(parts)
 
     if not body_str:
         skipped += 1
