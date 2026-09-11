@@ -4,7 +4,7 @@
 sections:
   - id: unpaid_bills
     title: "Unpaid Bills"
-    filter: "unpaid:true"
+    filter: "paid:false"
     sort: "dueDate:asc"
     columns: [vendor, amount, dueDate, daysLate, category]
     delivery: [telegram, file]
@@ -16,9 +16,9 @@ sections:
     columns: [vendor, amount, paidDate, paymentMethod]
     delivery: [telegram, file]
 
-  - id: unmatched_receipts
-    title: "Unmatched Receipts (Needs Review)"
-    filter: "matched:false"
+- id: unmatched_receipts
+    title: "Receipts"
+    filter: ""
     sort: "paymentDate:desc"
     columns: [vendor, amount, paymentDate, emailSubject]
     delivery: [telegram, file]

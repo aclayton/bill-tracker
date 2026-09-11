@@ -13,6 +13,7 @@ storage:
 matching:
   amount_tolerance: 0.50
   confidence_threshold: 0.7
+  auto_match: false    # set true to auto-match receipts to unpaid bills
 
 parser:
   model: "google/gemini-3-flash-preview"

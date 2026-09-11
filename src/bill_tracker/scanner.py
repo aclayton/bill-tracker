@@ -225,24 +225,30 @@ def process_scan_result(
         )
         upsert_receipt(store_receipts, receipt)
 
-        # Auto-match receipt to unpaid bill
-        unpaid_bills = [b for b in store_bills.bills if not b.paid]
-        from bill_tracker.matcher import match_receipt_to_bill
+        # Auto-match receipt to unpaid bill (only if enabled in config)
+        if config.get("matching", {}).get("auto_match", False):
+            unpaid_bills = [b for b in store_bills.bills if not b.paid]
+            from bill_tracker.matcher import match_receipt_to_bill
 
-        matched_bill_id = match_receipt_to_bill(receipt, unpaid_bills, tolerance, vendors)
-        if matched_bill_id:
-            receipt.matchedBillId = matched_bill_id
-            mark_bill_paid(store_bills, matched_bill_id, payment_date, receipt_id)
-            summary["action"] = "receipt_matched"
-            summary["details"] = (
-                f"Receipt from {vendor_name} matched to bill {matched_bill_id}. "
-                f"Bill marked paid."
-            )
+            matched_bill_id = match_receipt_to_bill(receipt, unpaid_bills, tolerance, vendors)
+            if matched_bill_id:
+                receipt.matchedBillId = matched_bill_id
+                mark_bill_paid(store_bills, matched_bill_id, payment_date, receipt_id)
+                summary["action"] = "receipt_matched"
+                summary["details"] = (
+                    f"Receipt from {vendor_name} matched to bill {matched_bill_id}. "
+                    f"Bill marked paid."
+                )
+            else:
+                summary["action"] = "receipt_stored"
+                summary["details"] = (
+                    f"Receipt from {vendor_name}: {fields.get('currency', 'CAD')} {fields.get('amount', 0.0)} "
+                    f"(unmatched)"
+                )
         else:
             summary["action"] = "receipt_stored"
             summary["details"] = (
-                f"Receipt from {vendor_name}: {fields.get('currency', 'CAD')} {fields.get('amount', 0.0)} "
-                f"(unmatched)"
+                f"Receipt from {vendor_name}: {fields.get('currency', 'CAD')} {fields.get('amount', 0.0)}"
             )
         summary["receipt_id"] = receipt_id
 
