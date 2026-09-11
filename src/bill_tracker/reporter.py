@@ -271,6 +271,19 @@ def generate_report(
                 row = format_bill_row(item, display_columns)
             lines.append(row)
 
+        # Total row
+        total = sum((i.amount or 0) for i in sorted_items)
+        if "amount" in display_columns:
+            total_cells = []
+            for col in display_columns:
+                if col == "amount":
+                    total_cells.append(f"**{total:.2f}**")
+                elif col == "vendor":
+                    total_cells.append("**TOTAL**")
+                else:
+                    total_cells.append("")
+            lines.append("| " + " | ".join(total_cells) + " |")
+
         lines.append("")
 
     # Vendor summary
