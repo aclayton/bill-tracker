@@ -1,7 +1,0 @@
-# Bill Tracker v3 — Vendor Configuration
-# Add known vendors here with patterns, categories, and parsing hints.
-# Discovered vendors are auto-added below.
-
-vendors: []
-
-discovered: []

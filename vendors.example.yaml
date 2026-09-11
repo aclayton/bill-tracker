@@ -1,0 +1,73 @@
+# Bill Tracker — Vendor Configuration (EXAMPLE)
+#
+# Copy this file to `vendors.yaml` and edit it, or run `bill-tracker install`.
+#
+# - `vendors`: vendors you know about. Matching is case-insensitive and
+#   respects both `name` and `patterns`.
+# - `discovered`: auto-populated at runtime when an unknown vendor is seen.
+#   Promote useful entries up into `vendors` to give them a category, currency,
+#   expected amount range, and optional parser hint.
+#
+# `parser_hint` is injected into the LLM prompt to avoid known extraction
+# pitfalls (e.g. a vendor whose receipt numbers look like dollar amounts).
+
+vendors:
+  - name: Enbridge Gas
+    patterns: ["enbridge", "enbridge gas", "enbridgegas"]
+    category: utilities
+    currency: CAD
+    expected_range: [25.00, 180.00]
+    parser_hint: null
+
+  - name: NPEI Electricity
+    patterns: ["npei", "npe", "niagara peninsula energy", "niagara energy"]
+    category: utilities
+    currency: CAD
+    expected_range: [35.00, 220.00]
+    parser_hint: null
+
+  - name: Enercare
+    patterns: ["enercare", "enercare home", "enercare home services"]
+    category: utilities
+    currency: CAD
+    expected_range: [8.00, 75.00]
+    parser_hint: null
+
+  - name: Cogeco
+    patterns: ["cogeco", "cogeco connx", "cogeco internet"]
+    category: utilities
+    currency: CAD
+    expected_range: [25.00, 120.00]
+    parser_hint: null
+
+  - name: Apple
+    patterns: ["apple", "apple.com", "itunes", "icloud", "app store"]
+    category: software
+    currency: CAD
+    expected_range: [0.99, 250.00]
+    parser_hint: null
+
+  - name: OpenRouter
+    patterns: ["openrouter", "openrouter.ai", "open router"]
+    category: ai
+    currency: USD
+    expected_range: [5.00, 200.00]
+    parser_hint: >
+      Ignore numbers that look like receipt or invoice IDs. The actual charge
+      is usually a smaller amount near words like 'charged', 'total', or '$'.
+
+  - name: TD Bank
+    patterns: ["td bank", "td", "toronto dominion", "td canada"]
+    category: banking
+    currency: CAD
+    expected_range: [5.00, 75.00]
+    parser_hint: null
+
+  - name: SchoolCash
+    patterns: ["schoolcash", "school cash", "schoolcash online"]
+    category: education
+    currency: CAD
+    expected_range: [5.00, 200.00]
+    parser_hint: null
+
+discovered: []

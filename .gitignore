@@ -16,8 +16,9 @@ data/receipts.json.bak
 reports/*.md
 reports/*.html
 
-# User config (template is committed)
+# User config (templates are committed)
 config.yaml
+vendors.yaml
 
 # IDE
 .vscode/
